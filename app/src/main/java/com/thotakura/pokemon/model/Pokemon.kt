@@ -11,4 +11,6 @@ class Pokemon {
 
     @SerializedName("url")
     var url: String? = null
+
+    var imageUrl:String? = null
 }

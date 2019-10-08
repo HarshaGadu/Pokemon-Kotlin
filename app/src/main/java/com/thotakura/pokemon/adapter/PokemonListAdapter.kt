@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import com.thotakura.pokemon.R
 import com.thotakura.pokemon.model.Pokemon
+import kotlinx.android.synthetic.main.activity_pokemon_detail.*
 import kotlinx.android.synthetic.main.item_pokemon.view.*
 
 class PokemonListAdapter(
@@ -27,6 +29,7 @@ class PokemonListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.name.text = dataList[position].name
+        Picasso.with(context).load(dataList[position].imageUrl).into(holder.image)
         holder.container.setOnClickListener {
             listener.onPokemonClickedListener(dataList[position])
         }
@@ -34,10 +37,13 @@ class PokemonListAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name = itemView.tvName!!
+        val image = itemView.imageView!!
         val container = itemView.pokemonContainer!!
     }
 
     interface PokemonListener {
         fun onPokemonClickedListener(pokemon: Pokemon)
     }
+
+
 }
